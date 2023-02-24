@@ -1,0 +1,357 @@
+1///////////////////////////////////////////
+#include <iostream>
+using namespace std;
+void volume(int l, int w, int h )
+{
+     cout<<"Volume of a rectangle: "<<l*w*h<<endl;
+}
+void volume(double r, int h){
+    cout<<"Volume of a cylinder: "<<3.1416*r*r*h<<endl;
+}
+void volume(int sl)
+{
+     cout<<"Volume of a cube: "<<sl*sl*sl<<endl;
+}
+int main()
+{
+    int l,w,h,a;
+    double r;
+    cout<<"Enter l, h & w to calculate the volume of a rectangle:"<<endl;
+    cin>>l>>w>>h;
+    volume(l,w,h);
+    cout<<"Enter r & h to calculate the volume of a cylinder:"<<endl;
+    cin>>r>>h;
+    volume(r,h);
+    cout<<"Enter a to calculate the volume of a cube:"<<endl;
+    cin>>a;
+    volume(a);
+
+return 0;
+}
+2/////////////////////////////////////////////////
+#include <iostream>
+using namespace std;
+class time{
+int h,m;
+char ch;
+public:
+    time()
+    {
+        h=m=0;
+    }
+    void getData()
+    {
+        cout<<"Enter h : m"<<endl;
+        cin>>h>>ch>>m;
+    }
+    void add(time &t1, time &t2);
+    void display();
+};
+void time :: add(time &t1, time &t2)
+{
+     m=t1.m+t2.m;
+     h=m/60;
+     m=m%60;
+     h=h+t1.h+t2.h;
+}
+void time :: display()
+{
+    cout<<"Hours : Minutes"<<endl;
+    cout<<h<<":"<<m<<endl;
+}
+int main()
+{
+    time a,b,c;
+    a.getData();
+    b.getData();
+    c.add(a,b);
+    c.display();
+    return 0;
+}
+3/////////////////////////////////////////////
+#include <iostream>
+using namespace std;
+class COMPLEX{
+int real, imaginary;
+public:
+    COMPLEX()
+    {
+        real=imaginary=0;
+    }
+    COMPLEX(int r, int i)
+    {
+        real=r;
+        imaginary=i;
+    }
+    void add(COMPLEX &c1, COMPLEX &c2)
+    {
+        real=c1.real+c2.real;
+        imaginary=c1.imaginary+c2.imaginary;
+    }
+    void show()
+    {
+        cout<<"Complex number:\n";
+        cout<<real<<"+"<<imaginary<<"i";
+    }
+};
+int main()
+{
+    int r,i;
+    char ch;
+    cout<<"Enter a complex number:"<<endl;
+    cin>>r>>ch>>i>>ch;
+
+    COMPLEX ob1(r,i);
+    cout<<"Enter a complex number:"<<endl;
+    cin>>r>>ch>>i>>ch;
+
+    COMPLEX ob2(r,i);
+    COMPLEX ob3;
+    ob3.add(ob1,ob2);
+    ob3.show();
+    return 0;
+}
+4///////////////////////////////////
+#include <iostream>
+using namespace std;
+class B;
+class A{
+int a;
+public:
+    A(int x)
+    {
+        a=x;
+    }
+    friend void largest(A a1, B b1);
+    friend void smallest(A a1, B b1);
+};
+class B{
+int b;
+public:
+    B (int y)
+    {
+        b=y;
+    }
+    friend void largest(A a1, B b1);
+    friend void smallest(A a1, B b1);
+};
+void largest(A a1, B b1)
+{
+    if(a1.a>b1.b)
+        cout<<"The largest number is a="<<a1.a<<endl;
+    else
+        cout<<"The largest number is b="<<b1.b<<endl;
+}
+void smallest(A a1, B b1)
+{
+    if(a1.a<b1.b)
+        cout<<"The smallest number is a="<<a1.a<<endl;
+    else
+        cout<<"The smallest number is b="<<b1.b<<endl;
+}
+int main()
+{
+    int val1,val2;
+    cout<<"Enter the value for a"<<endl;
+    cin>>val1;
+    A ax(val1);
+    cout<<"Enter the value for b"<<endl;
+    cin>>val2;
+    B by(val2);
+    cout<<"Finding the largest and smallest between two number of two different classes:"<<endl;
+    largest(ax,by);
+    smallest(ax,by);
+    return 0;
+}
+5/////////////////////////////////////////////////
+
+
+6///////////////////////////////////////////////
+#include <iostream>
+#include <iomanip>
+using namespace std;
+class FLOAT
+{
+    float a;
+public:
+    FLOAT()
+    {
+        a=0.0;
+    }
+    FLOAT(float num1);
+    FLOAT operator + (FLOAT o);
+    FLOAT operator - (FLOAT o);
+    FLOAT operator * (FLOAT o);
+    FLOAT operator / (FLOAT o);
+    void display();
+};
+FLOAT :: FLOAT(float num1)
+{
+    a=num1;
+}
+FLOAT FLOAT :: operator +(FLOAT o)
+{
+    FLOAT c;
+    c.a =a+ o.a;
+    return c;
+}
+FLOAT FLOAT :: operator -(FLOAT o)
+{
+    FLOAT c;
+    c.a =a- o.a;
+    return c;
+}
+FLOAT FLOAT :: operator *(FLOAT o)
+{
+    FLOAT c;
+    c.a =a* o.a;
+    return c;
+}
+FLOAT FLOAT :: operator /(FLOAT o)
+{
+    FLOAT c;
+    c.a =a/ o.a;
+    return c;
+}
+void FLOAT :: display()
+{
+    cout<<"Result="<<a<<endl;
+}
+int main()
+{
+    float f1,f2;
+    cout<<"Enter two floating point number:"<<endl;
+    cin>>f1>>f2;
+    FLOAT o1(f1), o2(f2), o3;
+    cout<<"Addition:"<<endl;
+    o3=o1+o2;
+    o3.display();
+    cout<<"Subtraction:"<<endl;
+    o3=o1-o2;
+    o3.display();
+    cout<<"Multiplication:"<<endl;
+    o3=o1*o2;
+    o3.display();
+    cout<<"Division:"<<endl;
+    o3=o1/o2;
+    o3.display();
+    return 0;
+}
+
+7//////////////////////////
+#include <iostream>
+using namespace std;
+
+
+class area_cl
+{
+    public:
+    double height;
+    double width;
+    void area(){cout<<"Base Class!\n";}
+};
+
+class rectangle:public area_cl
+{
+    public:
+    rectangle(double h,double w)
+    {
+        height=h;
+        width=w;
+    }
+    double area()
+    {
+        return height*width;
+    }
+};
+
+class isosceles:public area_cl
+{
+    public:
+    isosceles(double h,double w)
+    {
+        height=h;
+        width=w;
+    }
+    double area()
+    {
+        return 0.5*height*width;
+    }
+};
+
+int main()
+{
+    rectangle rc(3.2,6.4);
+    isosceles is(3.3,6.4);
+
+    cout<<rc.area()<<endl;
+    cout<<is.area();
+
+    return 0;
+}
+8//////////////////////
+
+9//////////////////////////////////
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+int main ()
+{
+ifstream first_file;
+ifstream second_file;
+first_file.open("data.txt",ios::in);
+second_file.open("new.txt",ios::out);
+string myline;
+
+    if(!first_file)
+        {
+            cout<<" Error: File not found";
+        }
+    else
+    {
+       while(first_file.eof()!=true)
+        {
+            getline (first_file, myline);
+            cout << myline << '\n';
+            second_file>>myline;
+        }
+    }
+return 0;
+}
+
+10/////////////////////////
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+    fstream first_file;
+    fstream second_file;
+    char read;
+
+    first_file.open("data.txt",ios::in );
+    second_file.open("new.txt",ios::out );
+    if(!first_file)
+        {
+            cout<<" Error: File not found";
+        }
+    else
+    {
+        while(1)
+        {
+            first_file>>read;
+            if(first_file.eof())
+                break;
+            second_file<<read;
+        }
+    }
+
+
+
+    first_file.close();
+    second_file.close();
+
+
+    return 0;
+}
